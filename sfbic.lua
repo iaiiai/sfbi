@@ -1,6 +1,6 @@
 script_name('sfbi-script')
 script_version('0.0.2')
-script_author('Разработчик: William Raines. Отдельная благодарность: Donny Provenzano, Gabriel Marques и Kevin Norberg')
+script_author('ГђГ Г§Г°Г ГЎГ®ГІГ·ГЁГЄ: William Raines. ГЋГІГ¤ГҐГ«ГјГ­Г Гї ГЎГ«Г ГЈГ®Г¤Г Г°Г­Г®Г±ГІГј: Donny Provenzano, Gabriel Marques ГЁ Kevin Norberg')
 script_properties('work-in-pause')
 
 local console = {}
@@ -99,7 +99,7 @@ function chat.sendMessage(text)
 end
 
 function chat.sendWarning(text)
-  sampAddChatMessage(string.format('[SWAT FBI {a11212}Предупреждение{363636}] {ffffff}%s', text), 0x363636);
+  sampAddChatMessage(string.format('[SWAT FBI {a11212}ГЏГ°ГҐГ¤ГіГЇГ°ГҐГ¦Г¤ГҐГ­ГЁГҐ{363636}] {ffffff}%s', text), 0x363636);
 end
 
 function chat.sendHeader(text)
@@ -111,11 +111,11 @@ function chat.sendEmployee(id, name, rank, duty, position)
   if not position then
     position = 'Operative Officer'
   end
-  if duty == 'На работе' then
+  if duty == 'ГЌГ  Г°Г ГЎГ®ГІГҐ' then
     onDuty = true
     return sampAddChatMessage(string.format('# {9C3848}[%s] {ffffff}%s {9C3848}: {ffffff}%s {9C3848}|{ffffff} %s', id, name, rank, position), -1);
   end
-  return sampAddChatMessage(string.format('# {9C3848}[%s] {ffffff}%s {9C3848}: {ffffff}%s {9C3848}|{ffffff} %s {ed0713}[!] Прогул', id, name, rank, position), 0x1e90ff);
+  return sampAddChatMessage(string.format('# {9C3848}[%s] {ffffff}%s {9C3848}: {ffffff}%s {9C3848}|{ffffff} %s {ed0713}[!] ГЏГ°Г®ГЈГіГ«', id, name, rank, position), 0x1e90ff);
 end
 
 function chat.sendSquadmate(id, name, callsign, rank, organization, position)
@@ -126,7 +126,7 @@ function chat.showIRCMessage(user, channel, message, squad_name, ooc)
   if (string.match(message, '(( %. ))')) or ooc then
     return sampAddChatMessage(string.format('{363636}%s {ffffff}| %s: (( %s ))', squad_name, user, message), -1)
   end
-  sampAddChatMessage(string.format('{363636}%s {a11212}[Рация] {ffffff}| %s: %s', squad_name, user, message), -1)
+  sampAddChatMessage(string.format('{363636}%s {a11212}[ГђГ Г¶ГЁГї] {ffffff}| %s: %s', squad_name, user, message), -1)
 end
 
 function chat.sendSpace()
@@ -155,21 +155,21 @@ function autoupdate(json_url, prefix, url)
               lua_thread.create(function(prefix)
                 local dlstatus = require('moonloader').download_status
                 local color = -1
-                chat.sendMessage((prefix..'Обнаружено обновление. Пытаюсь обновиться c '..thisScript().version..' на '..updateversion), color)
+                chat.sendMessage((prefix..'ГЋГЎГ­Г Г°ГіГ¦ГҐГ­Г® Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ. ГЏГ»ГІГ ГѕГ±Гј Г®ГЎГ­Г®ГўГЁГІГјГ±Гї c '..thisScript().version..' Г­Г  '..updateversion), color)
                 wait(250)
                 downloadUrlToFile(updatelink, thisScript().path,
                   function(id3, status1, p13, p23)
                     if status1 == dlstatus.STATUS_DOWNLOADINGDATA then
-                      print(string.format('Загружено %d из %d.', p13, p23))
+                      print(string.format('Г‡Г ГЈГ°ГіГ¦ГҐГ­Г® %d ГЁГ§ %d.', p13, p23))
                     elseif status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
-                      print('Загрузка обновления завершена.')
-                      chat.sendMessage((prefix..'Обновление завершено!'), color)
+                      print('Г‡Г ГЈГ°ГіГ§ГЄГ  Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГї Г§Г ГўГҐГ°ГёГҐГ­Г .')
+                      chat.sendMessage((prefix..'ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ Г§Г ГўГҐГ°ГёГҐГ­Г®!'), color)
                       goupdatestatus = true
                       lua_thread.create(function() wait(500) thisScript():reload() end)
                     end
                     if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
                       if goupdatestatus == nil then
-                        chat.sendMessage((prefix..'Обновление прошло неудачно. Запускаю устаревшую версию..'), color)
+                        chat.sendMessage((prefix..'ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ГЇГ°Г®ГёГ«Г® Г­ГҐГіГ¤Г Г·Г­Г®. Г‡Г ГЇГіГ±ГЄГ Гѕ ГіГ±ГІГ Г°ГҐГўГёГіГѕ ГўГҐГ°Г±ГЁГѕ..'), color)
                         update = false
                       end
                     end
@@ -179,11 +179,11 @@ function autoupdate(json_url, prefix, url)
               )
             else
               update = false
-              print('v'..thisScript().version..': Обновление не требуется.')
+              print('v'..thisScript().version..': ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ Г­ГҐ ГІГ°ГҐГЎГіГҐГІГ±Гї.')
             end
           end
         else
-          print('v'..thisScript().version..': Не могу проверить обновление. Смиритесь или проверьте самостоятельно на '..url)
+          print('v'..thisScript().version..': ГЌГҐ Г¬Г®ГЈГі ГЇГ°Г®ГўГҐГ°ГЁГІГј Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ. Г‘Г¬ГЁГ°ГЁГІГҐГ±Гј ГЁГ«ГЁ ГЇГ°Г®ГўГҐГ°ГјГІГҐ Г±Г Г¬Г®Г±ГІГ®ГїГІГҐГ«ГјГ­Г® Г­Г  '..url)
           update = false
         end
       end
@@ -235,14 +235,14 @@ function _table.filterSquad(filteredMembers)
   for key, employee in pairs(filteredMembers) do
     for key, squadmate in pairs(squadmates) do
       if squadmate:find(employee.nickname) then
-        _callsign = string.match(squadmate, '| %[[А-Яа-я]+%]')
-        callsign = string.match(_callsign, '[А-Яа-я]+')
+        _callsign = string.match(squadmate, '| %[[ГЂ-ГџГ -Гї]+%]')
+        callsign = string.match(_callsign, '[ГЂ-ГџГ -Гї]+')
         _organization = string.match(squadmate, '| %a%a%a?%a')
         organization = string.match(_organization, '%a%a%a?%a')
-        _position = string.match(squadmate, '%([А-Яа-я]+%.?[А-Яа-я]+%)')
-        position = string.match(_position, '[А-Яа-я]+%.?[А-Яа-я]+')
-        _rank = string.match(squadmate, '| [А-Яа-я]+%.?[А-Яа-я]+')
-        rank = string.match(_rank, '[А-Яа-я]+%.?[А-Яа-я]+')
+        _position = string.match(squadmate, '%([ГЂ-ГџГ -Гї]+%.?[ГЂ-ГџГ -Гї]+%)')
+        position = string.match(_position, '[ГЂ-ГџГ -Гї]+%.?[ГЂ-ГџГ -Гї]+')
+        _rank = string.match(squadmate, '| [ГЂ-ГџГ -Гї]+%.?[ГЂ-ГџГ -Гї]+')
+        rank = string.match(_rank, '[ГЂ-ГџГ -Гї]+%.?[ГЂ-ГџГ -Гї]+')
         
         employee['callsign'] = callsign
         employee['organization'] = organization
@@ -267,7 +267,7 @@ function network.get(link)
     return false
   end
   print("Status:", body and "OK" or "FAILED")
-  print("Данные успешно загружены | ", code)
+  print("Г„Г Г­Г­Г»ГҐ ГіГ±ГЇГҐГёГ­Г® Г§Г ГЈГ°ГіГ¦ГҐГ­Г» | ", code)
   return resp
 end
 
@@ -442,14 +442,14 @@ function imgui.OnDrawFrame()
   if members_window_state.v then
     imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(800, 400), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8'[S-FBI] Список сотрудников | Всего в сети: ' .. #staff, members_window_state, imgui.WindowFlags.NoResize)
+    imgui.Begin(u8'[S-FBI] Г‘ГЇГЁГ±Г®ГЄ Г±Г®ГІГ°ГіГ¤Г­ГЁГЄГ®Гў | Г‚Г±ГҐГЈГ® Гў Г±ГҐГІГЁ: ' .. #staff, members_window_state, imgui.WindowFlags.NoResize)
     imgui.Columns(6, 'Squadmates info', true)
     imgui.TextColoredRGB('{20d400}ID')
     for key, squadmate in pairs(staff) do 
       imgui.TextColoredRGB('{1b7507}' .. squadmate.id)
     end
     imgui.NextColumn()
-    imgui.TextColoredRGB('{B81E56}Никнейм')
+    imgui.TextColoredRGB('{B81E56}ГЌГЁГЄГ­ГҐГ©Г¬')
     for key, squadmate in pairs(staff) do
       if squadmate.nickname == 'William_Raines' then
       imgui.TextColoredRGB('{342dfa}' .. squadmate.nickname .. '{fa2d3e} +')
@@ -458,12 +458,12 @@ function imgui.OnDrawFrame()
       end
     end
     imgui.NextColumn()
-    imgui.TextColoredRGB('{de0012}Позывной')
+    imgui.TextColoredRGB('{de0012}ГЏГ®Г§Г»ГўГ­Г®Г©')
     for key, squadmate in pairs(staff) do 
       imgui.Text(u8(squadmate.callsign))
     end
     imgui.NextColumn()
-    imgui.TextColoredRGB('{e4f500}Организация')
+    imgui.TextColoredRGB('{e4f500}ГЋГ°ГЈГ Г­ГЁГ§Г Г¶ГЁГї')
     for key, squadmate in pairs(staff) do 
       if squadmate.organization:find('PD') then
         imgui.TextColoredRGB('{0400ff}' .. squadmate.organization)
@@ -474,12 +474,12 @@ function imgui.OnDrawFrame()
       end
     end
     imgui.NextColumn()
-    imgui.TextColoredRGB('{e4f500}Звание')
+    imgui.TextColoredRGB('{e4f500}Г‡ГўГ Г­ГЁГҐ')
     for key, squadmate in pairs(staff) do 
       imgui.Text(u8(squadmate.rank))
     end
     imgui.NextColumn()
-    imgui.TextColoredRGB('{ff4b19}Должность')
+    imgui.TextColoredRGB('{ff4b19}Г„Г®Г«Г¦Г­Г®Г±ГІГј')
     imgui.Separator()
     for key, squadmate in pairs(staff) do 
       imgui.Text(u8(squadmate.position))
@@ -490,74 +490,74 @@ function imgui.OnDrawFrame()
   if main_window_state.v then
     imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(300, 300), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8'SWAT FBI | Главное меню | Версия: 0.0.2', main_window_state, imgui.WindowFlags.NoResize)
-    if imgui.ButtonHex(u8'Команды скрипта', 0x6468e8, imgui.ImVec2(285, 0)) then
+    imgui.Begin(u8'SWAT FBI | ГѓГ«Г ГўГ­Г®ГҐ Г¬ГҐГ­Гѕ | Г‚ГҐГ°Г±ГЁГї: 0.0.2', main_window_state, imgui.WindowFlags.NoResize)
+    if imgui.ButtonHex(u8'ГЉГ®Г¬Г Г­Г¤Г» Г±ГЄГ°ГЁГЇГІГ ', 0x6468e8, imgui.ImVec2(285, 0)) then
       commandHandlers.renderS_C()
     end
-    if imgui.ButtonHex(u8'Информация для стажёров', 0x6468e8, imgui.ImVec2(285, 0)) then
+    if imgui.ButtonHex(u8'Г€Г­ГґГ®Г°Г¬Г Г¶ГЁГї Г¤Г«Гї Г±ГІГ Г¦ВёГ°Г®Гў', 0x6468e8, imgui.ImVec2(285, 0)) then
       commandHandlers.renderIFT()
     end
-    if imgui.ButtonHex(u8'Тен-коды', 0x6468e8, imgui.ImVec2(285, 0)) then
+    if imgui.ButtonHex(u8'Г’ГҐГ­-ГЄГ®Г¤Г»', 0x6468e8, imgui.ImVec2(285, 0)) then
       commandHandlers.renderCodes()
     end
-    if imgui.ButtonHex(u8'Отыгровки', 0x6468e8, imgui.ImVec2(285, 0)) then
+    if imgui.ButtonHex(u8'ГЋГІГ»ГЈГ°Г®ГўГЄГЁ', 0x6468e8, imgui.ImVec2(285, 0)) then
       commandHandlers.renderActings()
     end
-    if imgui.ButtonHex(u8'Протокол', 0x6468e8, imgui.ImVec2(285, 0)) then
+    if imgui.ButtonHex(u8'ГЏГ°Г®ГІГ®ГЄГ®Г«', 0x6468e8, imgui.ImVec2(285, 0)) then
       commandHandlers.renderProtocol()
     end
-    imgui.CenterTextColoredRGB('{ff0000}[!]{ffffff} Тестовый режим')
-    imgui.CenterTextColoredRGB('{ff0000}[!]{ffffff} Если нашли баг: {4C75A3}vk.com/w.raines')
-    imgui.CenterTextColoredRGB('{ff0000}[+]{ffffff} Автор скрипта: William_Raines')
+    imgui.CenterTextColoredRGB('{ff0000}[!]{ffffff} Г’ГҐГ±ГІГ®ГўГ»Г© Г°ГҐГ¦ГЁГ¬')
+    imgui.CenterTextColoredRGB('{ff0000}[!]{ffffff} Г…Г±Г«ГЁ Г­Г ГёГ«ГЁ ГЎГ ГЈ: {4C75A3}vk.com/w.raines')
+    imgui.CenterTextColoredRGB('{ff0000}[+]{ffffff} ГЂГўГІГ®Г° Г±ГЄГ°ГЁГЇГІГ : William_Raines')
     imgui.End()
   end
 
   if s_c_window_state.v then
     imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(350, 200), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8'SWAT FBI | Команды скрипта | Версия: 0.0.2', s_c_window_state, imgui.WindowFlags.NoResize)
-    imgui.CenterTextColoredRGB('{ff0000}/cv{ffffff} - Говорить в шифрованный канал')
-    imgui.CenterTextColoredRGB('{ff0000}/cb{ffffff} - OOC шифр.канал')
-    imgui.CenterTextColoredRGB('{ff0000}/getsquad{ffffff} - Список игроков онлайн')
-    imgui.CenterTextColoredRGB('{ff0000}/sfbi{ffffff} - Вызвать меню скрипта')
-    imgui.CenterTextColoredRGB('{ff0000}Клавиша «U»{ffffff} - Вызвать меню скрипта')
+    imgui.Begin(u8'SWAT FBI | ГЉГ®Г¬Г Г­Г¤Г» Г±ГЄГ°ГЁГЇГІГ  | Г‚ГҐГ°Г±ГЁГї: 0.0.2', s_c_window_state, imgui.WindowFlags.NoResize)
+    imgui.CenterTextColoredRGB('{ff0000}/cv{ffffff} - ГѓГ®ГўГ®Г°ГЁГІГј Гў ГёГЁГґГ°Г®ГўГ Г­Г­Г»Г© ГЄГ Г­Г Г«')
+    imgui.CenterTextColoredRGB('{ff0000}/cb{ffffff} - OOC ГёГЁГґГ°.ГЄГ Г­Г Г«')
+    imgui.CenterTextColoredRGB('{ff0000}/getsquad{ffffff} - Г‘ГЇГЁГ±Г®ГЄ ГЁГЈГ°Г®ГЄГ®Гў Г®Г­Г«Г Г©Г­')
+    imgui.CenterTextColoredRGB('{ff0000}/sfbi{ffffff} - Г‚Г»Г§ГўГ ГІГј Г¬ГҐГ­Гѕ Г±ГЄГ°ГЁГЇГІГ ')
+    imgui.CenterTextColoredRGB('{ff0000}ГЉГ«Г ГўГЁГёГ  В«UВ»{ffffff} - Г‚Г»Г§ГўГ ГІГј Г¬ГҐГ­Гѕ Г±ГЄГ°ГЁГЇГІГ ')
     imgui.End()
   end
 
   if ift_window_state.v then
     imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(1150, 500), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8'SWAT FBI | Информация для стажёров | Версия: 0.0.2', ift_window_state, imgui.WindowFlags.NoResize)
+    imgui.Begin(u8'SWAT FBI | Г€Г­ГґГ®Г°Г¬Г Г¶ГЁГї Г¤Г«Гї Г±ГІГ Г¦ВёГ°Г®Гў | Г‚ГҐГ°Г±ГЁГї: 0.0.2', ift_window_state, imgui.WindowFlags.NoResize)
     imgui.BeginChild('Selectors', imgui.ImVec2(230, 450), true)
-      if imgui.Selectable(u8'Общее положение', is_genRule) then
+      if imgui.Selectable(u8'ГЋГЎГ№ГҐГҐ ГЇГ®Г«Г®Г¦ГҐГ­ГЁГҐ', is_genRule) then
         is_genRule = true
         is_wtInfo = false
         is_reportRules = false
         is_priorityTasks = false
         is_sfbiAllowedToDo = false
       end
-      if imgui.Selectable(u8'Информация о шифр.канале', is_wtInfo) then
+      if imgui.Selectable(u8'Г€Г­ГґГ®Г°Г¬Г Г¶ГЁГї Г® ГёГЁГґГ°.ГЄГ Г­Г Г«ГҐ', is_wtInfo) then
         is_genRule = false
         is_wtInfo = true
         is_reportRules = false
         is_priorityTasks = false
         is_sfbiAllowedToDo = false
       end
-      if imgui.Selectable(u8'Правила докладов в шифр.канал', is_reportRules) then
+      if imgui.Selectable(u8'ГЏГ°Г ГўГЁГ«Г  Г¤Г®ГЄГ«Г Г¤Г®Гў Гў ГёГЁГґГ°.ГЄГ Г­Г Г«', is_reportRules) then
         is_genRule = false
         is_wtInfo = false
         is_reportRules = true
         is_priorityTasks = false
         is_sfbiAllowedToDo = false
       end
-      if imgui.Selectable(u8'Приоритеты для бойцов', is_priorityTasks) then
+      if imgui.Selectable(u8'ГЏГ°ГЁГ®Г°ГЁГІГҐГІГ» Г¤Г«Гї ГЎГ®Г©Г¶Г®Гў', is_priorityTasks) then
         is_genRule = false
         is_wtInfo = false
         is_reportRules = false
         is_priorityTasks = true
         is_sfbiAllowedToDo = false
       end
-      if imgui.Selectable(u8'Бойцам S-FBI разрешено', is_sfbiAllowedToDo) then
+      if imgui.Selectable(u8'ГЃГ®Г©Г¶Г Г¬ S-FBI Г°Г Г§Г°ГҐГёГҐГ­Г®', is_sfbiAllowedToDo) then
         is_genRule = false
         is_wtInfo = false
         is_reportRules = false
@@ -592,13 +592,13 @@ function imgui.OnDrawFrame()
   if codes_window_state.v then
     imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(1150, 500), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8'SWAT FBI | Тен коды | Версия: 0.0.2', codes_window_state, imgui.WindowFlags.NoResize)
+    imgui.Begin(u8'SWAT FBI | Г’ГҐГ­ ГЄГ®Г¤Г» | Г‚ГҐГ°Г±ГЁГї: 0.0.2', codes_window_state, imgui.WindowFlags.NoResize)
     imgui.BeginChild('Selectors2', imgui.ImVec2(230, 450), true)
-      if imgui.Selectable(u8'Коды руководства', is_codeFromStaff) then
+      if imgui.Selectable(u8'ГЉГ®Г¤Г» Г°ГіГЄГ®ГўГ®Г¤Г±ГІГўГ ', is_codeFromStaff) then
         is_codeFromStaff = true
         is_codeFromSquadmate = false
       end
-      if imgui.Selectable(u8'Коды патрулей', is_codeFromSquadmate) then
+      if imgui.Selectable(u8'ГЉГ®Г¤Г» ГЇГ ГІГ°ГіГ«ГҐГ©', is_codeFromSquadmate) then
         is_codeFromStaff = false
         is_codeFromSquadmate = true
       end
@@ -621,9 +621,9 @@ function imgui.OnDrawFrame()
   if protocol_window_state.v then
     imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(1150, 500), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8'SWAT FBI | Тен коды | Версия: 0.0.2', protocol_window_state, imgui.WindowFlags.NoResize)
+    imgui.Begin(u8'SWAT FBI | Г’ГҐГ­ ГЄГ®Г¤Г» | Г‚ГҐГ°Г±ГЁГї: 0.0.2', protocol_window_state, imgui.WindowFlags.NoResize)
     imgui.BeginChild('Selectors2', imgui.ImVec2(230, 450), true)
-      if imgui.Selectable(u8'Протокол отряда', is_protocol) then
+      if imgui.Selectable(u8'ГЏГ°Г®ГІГ®ГЄГ®Г« Г®ГІГ°ГїГ¤Г ', is_protocol) then
         is_protocol = true
       end
     imgui.EndChild()
@@ -642,55 +642,55 @@ function imgui.OnDrawFrame()
   if actings_window_state.v then
     imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(300, 300), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8'SWAT FBI | Отыгровки | Версия: 0.0.2', actings_window_state, imgui.WindowFlags.NoResize)
-    if imgui.ButtonHex(u8'Замаскировать себя', 0x6468e8, imgui.ImVec2(285, 0)) then
+    imgui.Begin(u8'SWAT FBI | ГЋГІГ»ГЈГ°Г®ГўГЄГЁ | Г‚ГҐГ°Г±ГЁГї: 0.0.2', actings_window_state, imgui.WindowFlags.NoResize)
+    if imgui.ButtonHex(u8'Г‡Г Г¬Г Г±ГЄГЁГ°Г®ГўГ ГІГј Г±ГҐГЎГї', 0x6468e8, imgui.ImVec2(285, 0)) then
       lua_thread.create(
         function ()
-          sampSendChat('/me сорвал с формы шевроны и знаки отличий, затем бросил их на землю')
+          sampSendChat('/me Г±Г®Г°ГўГ Г« Г± ГґГ®Г°Г¬Г» ГёГҐГўГ°Г®Г­Г» ГЁ Г§Г­Г ГЄГЁ Г®ГІГ«ГЁГ·ГЁГ©, Г§Г ГІГҐГ¬ ГЎГ°Г®Г±ГЁГ« ГЁГµ Г­Г  Г§ГҐГ¬Г«Гѕ')
           wait(7000)
-          sampSendChat('/do Неизвестный одет в камуфляж тёмно-зелёного цвета.')
+          sampSendChat('/do ГЌГҐГЁГ§ГўГҐГ±ГІГ­Г»Г© Г®Г¤ГҐГІ Гў ГЄГ Г¬ГіГґГ«ГїГ¦ ГІВёГ¬Г­Г®-Г§ГҐГ«ВёГ­Г®ГЈГ® Г¶ГўГҐГІГ .')
           wait(7000)
-          sampSendChat('/do На туловище висит бронежилет V класса защиты.')
+          sampSendChat('/do ГЌГ  ГІГіГ«Г®ГўГЁГ№ГҐ ГўГЁГ±ГЁГІ ГЎГ°Г®Г­ГҐГ¦ГЁГ«ГҐГІ V ГЄГ«Г Г±Г±Г  Г§Г Г№ГЁГІГ».')
           wait(7000)
-          sampSendChat('/do На голове каска «OPS-CORE FAST» и доп.приборы связи.')
+          sampSendChat('/do ГЌГ  ГЈГ®Г«Г®ГўГҐ ГЄГ Г±ГЄГ  В«OPS-CORE FASTВ» ГЁ Г¤Г®ГЇ.ГЇГ°ГЁГЎГ®Г°Г» Г±ГўГїГ§ГЁ.')
           wait(7000)
-          sampSendChat('/do Опознавательных знаков или шевронов на форме не имеется.')
+          sampSendChat('/do ГЋГЇГ®Г§Г­Г ГўГ ГІГҐГ«ГјГ­Г»Гµ Г§Г­Г ГЄГ®Гў ГЁГ«ГЁ ГёГҐГўГ°Г®Г­Г®Гў Г­Г  ГґГ®Г°Г¬ГҐ Г­ГҐ ГЁГ¬ГҐГҐГІГ±Гї.')
           wait(7000)
-          sampSendChat('/do Лицо закрывает балаклава и очки. Личность не распознать.')
+          sampSendChat('/do Г‹ГЁГ¶Г® Г§Г ГЄГ°Г»ГўГ ГҐГІ ГЎГ Г«Г ГЄГ«Г ГўГ  ГЁ Г®Г·ГЄГЁ. Г‹ГЁГ·Г­Г®Г±ГІГј Г­ГҐ Г°Г Г±ГЇГ®Г§Г­Г ГІГј.')
         end
       )
     end
-    if imgui.ButtonHex(u8'Надеть противогаз', 0x6468e8, imgui.ImVec2(285, 0)) then
+    if imgui.ButtonHex(u8'ГЌГ Г¤ГҐГІГј ГЇГ°Г®ГІГЁГўГ®ГЈГ Г§', 0x6468e8, imgui.ImVec2(285, 0)) then
       lua_thread.create(function ()
-        sampSendChat('/do На бедре левой ноги висит подсумок с противогазом ГП-21.')
+        sampSendChat('/do ГЌГ  ГЎГҐГ¤Г°ГҐ Г«ГҐГўГ®Г© Г­Г®ГЈГЁ ГўГЁГ±ГЁГІ ГЇГ®Г¤Г±ГіГ¬Г®ГЄ Г± ГЇГ°Г®ГІГЁГўГ®ГЈГ Г§Г®Г¬ ГѓГЏ-21.')
         wait(7000)
-        sampSendChat('/me задержав дыхание, достал противогаз и ловким движением надел его')
+        sampSendChat('/me Г§Г Г¤ГҐГ°Г¦Г Гў Г¤Г»ГµГ Г­ГЁГҐ, Г¤Г®Г±ГІГ Г« ГЇГ°Г®ГІГЁГўГ®ГЈГ Г§ ГЁ Г«Г®ГўГЄГЁГ¬ Г¤ГўГЁГ¦ГҐГ­ГЁГҐГ¬ Г­Г Г¤ГҐГ« ГҐГЈГ®')
       end
       )
     end
-    if imgui.ButtonHex(u8'Бросить СШГ с вертолёта', 0x6468e8, imgui.ImVec2(285, 0)) then
+    if imgui.ButtonHex(u8'ГЃГ°Г®Г±ГЁГІГј Г‘ГГѓ Г± ГўГҐГ°ГІГ®Г«ВёГІГ ', 0x6468e8, imgui.ImVec2(285, 0)) then
       lua_thread.create(function ()
-        sampSendChat('/me достал из под сиденья прибор для определения координат')
+        sampSendChat('/me Г¤Г®Г±ГІГ Г« ГЁГ§ ГЇГ®Г¤ Г±ГЁГ¤ГҐГ­ГјГї ГЇГ°ГЁГЎГ®Г° Г¤Г«Гї Г®ГЇГ°ГҐГ¤ГҐГ«ГҐГ­ГЁГї ГЄГ®Г®Г°Г¤ГЁГ­Г ГІ')
         wait(3600)
-        sampSendChat('/do Прибор определил координаты похитителей: 2736.1374.1749.9563.')
+        sampSendChat('/do ГЏГ°ГЁГЎГ®Г° Г®ГЇГ°ГҐГ¤ГҐГ«ГЁГ« ГЄГ®Г®Г°Г¤ГЁГ­Г ГІГ» ГЇГ®ГµГЁГІГЁГІГҐГ«ГҐГ©: 2736.1374.1749.9563.')
         wait(3600)
-        r_service.sendIC('Координаты похитителей: 2736.1374.1749.9563. Готовлюсь работать СШГ.')
+        r_service.sendIC('ГЉГ®Г®Г°Г¤ГЁГ­Г ГІГ» ГЇГ®ГµГЁГІГЁГІГҐГ«ГҐГ©: 2736.1374.1749.9563. ГѓГ®ГІГ®ГўГ«ГѕГ±Гј Г°Г ГЎГ®ГІГ ГІГј Г‘ГГѓ.')
         wait(3600)
-        sampSendChat('/me достал из-за пояса маленькие грузики, после чего прикрепил их к светошумовой гранате')
+        sampSendChat('/me Г¤Г®Г±ГІГ Г« ГЁГ§-Г§Г  ГЇГ®ГїГ±Г  Г¬Г Г«ГҐГ­ГјГЄГЁГҐ ГЈГ°ГіГ§ГЁГЄГЁ, ГЇГ®Г±Г«ГҐ Г·ГҐГЈГ® ГЇГ°ГЁГЄГ°ГҐГЇГЁГ« ГЁГµ ГЄ Г±ГўГҐГІГ®ГёГіГ¬Г®ГўГ®Г© ГЈГ°Г Г­Г ГІГҐ')
         wait(3600)
-        sampSendChat('/me слегка приоткрыл задвижную дверь вертолета')
+        sampSendChat('/me Г±Г«ГҐГЈГЄГ  ГЇГ°ГЁГ®ГІГЄГ°Г»Г« Г§Г Г¤ГўГЁГ¦Г­ГіГѕ Г¤ГўГҐГ°Гј ГўГҐГ°ГІГ®Г«ГҐГІГ ')
         wait(3600)
-        r_service.sendIC('Бросаю СШГ.')
+        r_service.sendIC('ГЃГ°Г®Г±Г Гѕ Г‘ГГѓ.')
         wait(3600)
-        sampSendChat('/me кидает светошумовую гранату вниз')
+        sampSendChat('/me ГЄГЁГ¤Г ГҐГІ Г±ГўГҐГІГ®ГёГіГ¬Г®ГўГіГѕ ГЈГ°Г Г­Г ГІГі ГўГ­ГЁГ§')
         wait(3600)
-        sampSendChat('/cv Сбросил СШГ, 8 секунд')
+        sampSendChat('/cv Г‘ГЎГ°Г®Г±ГЁГ« Г‘ГГѓ, 8 Г±ГҐГЄГіГ­Г¤')
         wait(3600)
-        sampSendChat('/do В уши бойца вставлены М-звуокоподавляющие беруши, глушащие звук при 180+ дБ.')
+        sampSendChat('/do Г‚ ГіГёГЁ ГЎГ®Г©Г¶Г  ГўГ±ГІГ ГўГ«ГҐГ­Г» ГЊ-Г§ГўГіГ®ГЄГ®ГЇГ®Г¤Г ГўГ«ГїГѕГ№ГЁГҐ ГЎГҐГ°ГіГёГЁ, ГЈГ«ГіГёГ Г№ГЁГҐ Г§ГўГіГЄ ГЇГ°ГЁ 180+ Г¤ГЃ.')
         wait(3600)
-        sampSendChat('/do На бойце надеты спец.очки, подавляющие яркие вспышки света от 7 до 30 млн. кД.')
+        sampSendChat('/do ГЌГ  ГЎГ®Г©Г¶ГҐ Г­Г Г¤ГҐГІГ» Г±ГЇГҐГ¶.Г®Г·ГЄГЁ, ГЇГ®Г¤Г ГўГ«ГїГѕГ№ГЁГҐ ГїГ°ГЄГЁГҐ ГўГ±ГЇГ»ГёГЄГЁ Г±ГўГҐГІГ  Г®ГІ 7 Г¤Г® 30 Г¬Г«Г­. ГЄГ„.')
         wait(3600)
-        sampSendChat('/do СШГ упали с вертолетов возле переговорщика и похитителей, и У-Д принципом действия взорвались.')
+        sampSendChat('/do Г‘ГГѓ ГіГЇГ Г«ГЁ Г± ГўГҐГ°ГІГ®Г«ГҐГІГ®Гў ГўГ®Г§Г«ГҐ ГЇГҐГ°ГҐГЈГ®ГўГ®Г°Г№ГЁГЄГ  ГЁ ГЇГ®ГµГЁГІГЁГІГҐГ«ГҐГ©, ГЁ Г“-Г„ ГЇГ°ГЁГ­Г¶ГЁГЇГ®Г¬ Г¤ГҐГ©Г±ГІГўГЁГї ГўГ§Г®Г°ГўГ Г«ГЁГ±Гј.')
       end)
     end
     imgui.End()
@@ -753,7 +753,7 @@ local members = {}
 function waitForId()
   local result, myId = sampGetPlayerIdByCharHandle(PLAYER_PED)
   local myNick = sampGetPlayerNickname(myId)
-  chat.sendMessage('Происходит подгрузка данных сотрудников. Пожалуйста подождите.')
+  chat.sendMessage('ГЏГ°Г®ГЁГ±ГµГ®Г¤ГЁГІ ГЇГ®Г¤ГЈГ°ГіГ§ГЄГ  Г¤Г Г­Г­Г»Гµ Г±Г®ГІГ°ГіГ¤Г­ГЁГЄГ®Гў. ГЏГ®Г¦Г Г«ГіГ©Г±ГІГ  ГЇГ®Г¤Г®Г¦Г¤ГЁГІГҐ.')
   local squadmates = getEachSquadmate(_squad[1])
   table.insert(members, { id = myId, nickname = myNick })
   for key, nickname in pairs(squadmates) do
@@ -826,7 +826,7 @@ function onIRCMessage(user, channel, message)
   if user then
     chat.showIRCMessage(user.nick, channel, u8:decode(message), SQUAD_NAME)
   else
-    chat.sendWarning('Не удалось извлечь данные.')
+    chat.sendWarning('ГЌГҐ ГіГ¤Г Г«Г®Г±Гј ГЁГ§ГўГ«ГҐГ·Гј Г¤Г Г­Г­Г»ГҐ.')
   end
 end
 
@@ -836,8 +836,8 @@ function onIRCDisconnect(message, error)
     if connected then
       connected = false
       user:disconnect()
-      chat.sendWarning('Вы были отключены от чата за долгий АФК. Пробуем переподключиться к рации.')
-      chat.sendWarning('Экран подвиснет на 5-10 секунд из-за загрузки данных. Пожалуйста подождите.')
+      chat.sendWarning('Г‚Г» ГЎГ»Г«ГЁ Г®ГІГЄГ«ГѕГ·ГҐГ­Г» Г®ГІ Г·Г ГІГ  Г§Г  Г¤Г®Г«ГЈГЁГ© ГЂГ”ГЉ. ГЏГ°Г®ГЎГіГҐГ¬ ГЇГҐГ°ГҐГЇГ®Г¤ГЄГ«ГѕГ·ГЁГІГјГ±Гї ГЄ Г°Г Г¶ГЁГЁ.')
+      chat.sendWarning('ГќГЄГ°Г Г­ ГЇГ®Г¤ГўГЁГ±Г­ГҐГІ Г­Г  5-10 Г±ГҐГЄГіГ­Г¤ ГЁГ§-Г§Г  Г§Г ГЈГ°ГіГ§ГЄГЁ Г¤Г Г­Г­Г»Гµ. ГЏГ®Г¦Г Г«ГіГ©Г±ГІГ  ГЇГ®Г¤Г®Г¦Г¤ГЁГІГҐ.')
     end
   end
 end
@@ -866,7 +866,7 @@ function r_service.sendIC(params)
       user:sendChat(ROOM_ID, u8(params))
     end
   else
-    chat.sendWarning(string.format('Не удалось подключиться к рации %s. Пробуем переподключиться', SQUAD_NAME))
+    chat.sendWarning(string.format('ГЌГҐ ГіГ¤Г Г«Г®Г±Гј ГЇГ®Г¤ГЄГ«ГѕГ·ГЁГІГјГ±Гї ГЄ Г°Г Г¶ГЁГЁ %s. ГЏГ°Г®ГЎГіГҐГ¬ ГЇГҐГ°ГҐГЇГ®Г¤ГЄГ«ГѕГ·ГЁГІГјГ±Гї', SQUAD_NAME))
     r_service.connect()
   end
 end
@@ -880,7 +880,7 @@ function r_service.sendOOC(params)
       user:sendChat(ROOM_ID, u8(string.format( "(( %s ))", params)))
     end
   else
-    chat.sendWarning(string.format('Не удалось подключиться к рации %s. Пробуем переподключиться', SQUAD_NAME))
+    chat.sendWarning(string.format('ГЌГҐ ГіГ¤Г Г«Г®Г±Гј ГЇГ®Г¤ГЄГ«ГѕГ·ГЁГІГјГ±Гї ГЄ Г°Г Г¶ГЁГЁ %s. ГЏГ°Г®ГЎГіГҐГ¬ ГЇГҐГ°ГҐГЇГ®Г¤ГЄГ«ГѕГ·ГЁГІГјГ±Гї', SQUAD_NAME))
     r_service.connect()
   end
 end
@@ -891,7 +891,7 @@ function r_service.main()
       user:think()
       wait(600)
     else
-      chat.sendWarning(string.format('Подключение к рации %s выполнено.', SQUAD_NAME))
+      chat.sendWarning(string.format('ГЏГ®Г¤ГЄГ«ГѕГ·ГҐГ­ГЁГҐ ГЄ Г°Г Г¶ГЁГЁ %s ГўГ»ГЇГ®Г«Г­ГҐГ­Г®.', SQUAD_NAME))
       r_service.connect()
     end
   end
@@ -902,7 +902,7 @@ function main()
   if not isSampLoaded() or not isSampfuncsLoaded() then return end
   while not isSampAvailable() do wait(0) end
   wait(20000)
-  autoupdate('https://gist.githubusercontent.com/iaiiai/93a7d2e60070ad85b49e894afcfd15db/raw/52fafeb42c9865ac694693581866e6a86ccc5712/script_version.json', '', 'vk.com/w.raines')
+  autoupdate('https://raw.githubusercontent.com/iaiiai/sfbi/main/version.json', '', 'vk.com/w.raines')
   local _, playerId = sampGetPlayerIdByCharHandle(PLAYER_PED)
   local playerNick = sampGetPlayerNickname(playerId)
   -- Requests
@@ -925,15 +925,15 @@ function main()
   protocol = network.get('https://pastebin.com/raw/7b2vPfaY')
   if not regulations and not wt_info and not wt_report_rules and not wt_priority_tasks and not sfbi_allowed_toDo and not squad_codes 
   and not staff_codes and not protocol then
-    regulations = { [1] = 'Ошибка загрузки.' }
-    wt_info = { [1] = 'Ошибка загрузки.' }
-    wt_report_rules = { [1] = 'Ошибка загрузки.' }
-    wt_priority_tasks = { [1] = 'Ошибка загрузки.' }
-    sfbi_allowed_toDo = { [1] = 'Ошибка загрузки.' }
-    squad_codes = { [1] = 'Ошибка загрузки.' }
-    staff_codes = { [1] = 'Ошибка загрузки.' }
-    protocol = { [1] = 'Ошибка загрузки' }
-    chat.sendWarning('Не удалось загрузить важную информацию. Обратитесь к разработчику.')
+    regulations = { [1] = 'ГЋГёГЁГЎГЄГ  Г§Г ГЈГ°ГіГ§ГЄГЁ.' }
+    wt_info = { [1] = 'ГЋГёГЁГЎГЄГ  Г§Г ГЈГ°ГіГ§ГЄГЁ.' }
+    wt_report_rules = { [1] = 'ГЋГёГЁГЎГЄГ  Г§Г ГЈГ°ГіГ§ГЄГЁ.' }
+    wt_priority_tasks = { [1] = 'ГЋГёГЁГЎГЄГ  Г§Г ГЈГ°ГіГ§ГЄГЁ.' }
+    sfbi_allowed_toDo = { [1] = 'ГЋГёГЁГЎГЄГ  Г§Г ГЈГ°ГіГ§ГЄГЁ.' }
+    squad_codes = { [1] = 'ГЋГёГЁГЎГЄГ  Г§Г ГЈГ°ГіГ§ГЄГЁ.' }
+    staff_codes = { [1] = 'ГЋГёГЁГЎГЄГ  Г§Г ГЈГ°ГіГ§ГЄГЁ.' }
+    protocol = { [1] = 'ГЋГёГЁГЎГЄГ  Г§Г ГЈГ°ГіГ§ГЄГЁ' }
+    chat.sendWarning('ГЌГҐ ГіГ¤Г Г«Г®Г±Гј Г§Г ГЈГ°ГіГ§ГЁГІГј ГўГ Г¦Г­ГіГѕ ГЁГ­ГґГ®Г°Г¬Г Г¶ГЁГѕ. ГЋГЎГ°Г ГІГЁГІГҐГ±Гј ГЄ Г°Г Г§Г°Г ГЎГ®ГІГ·ГЁГЄГі.')
   end
   members_thread = lua_thread.create_suspended(waitForMembers)
   id_thread = lua_thread.create_suspended(waitForId)
@@ -943,11 +943,11 @@ function main()
   sampRegisterChatCommand('cb', r_service.sendOOC)
   sampRegisterChatCommand('sfbi', commandHandlers.renderMM)
   imgui.Process = false
-  chat.sendMessage('Разработчик:{ab0519} William Raines{ffffff}.')
-  chat.sendMessage('Отдельная благодарность {ab0519}Donny Provenzano{ffffff}, {ab0519}Gabriel Marques{ffffff} и {ab0519}Kevin Norberg{ffffff}.')
-  chat.sendMessage('{ab0519}Версия скрипта: {ffffff}0.0.2')
-  chat.sendMessage('Скрипт загружен.')
-  chat.sendMessage('Для вызова меню скрипта используйте клавишу {f5001d}«U»{ffffff}.')
+  chat.sendMessage('ГђГ Г§Г°Г ГЎГ®ГІГ·ГЁГЄ:{ab0519} William Raines{ffffff}.')
+  chat.sendMessage('ГЋГІГ¤ГҐГ«ГјГ­Г Гї ГЎГ«Г ГЈГ®Г¤Г Г°Г­Г®Г±ГІГј {ab0519}Donny Provenzano{ffffff}, {ab0519}Gabriel Marques{ffffff} ГЁ {ab0519}Kevin Norberg{ffffff}.')
+  chat.sendMessage('{ab0519}Г‚ГҐГ°Г±ГЁГї Г±ГЄГ°ГЁГЇГІГ : {ffffff}0.0.2')
+  chat.sendMessage('Г‘ГЄГ°ГЁГЇГІ Г§Г ГЈГ°ГіГ¦ГҐГ­.')
+  chat.sendMessage('Г„Г«Гї ГўГ»Г§Г®ГўГ  Г¬ГҐГ­Гѕ Г±ГЄГ°ГЁГЇГІГ  ГЁГ±ГЇГ®Г«ГјГ§ГіГ©ГІГҐ ГЄГ«Г ГўГЁГёГі {f5001d}В«UВ»{ffffff}.')
   lua_thread.create(r_service.main)
   while true do
     wait(0)
