@@ -1,5 +1,5 @@
 script_name('sfbi-script')
-script_version('0.0.3')
+script_version('0.0.2')
 script_author('Разработчик: William Raines. Отдельная благодарность: Donny Provenzano, Gabriel Marques и Kevin Norberg')
 script_properties('work-in-pause')
 
@@ -139,7 +139,6 @@ end
 function autoupdate(json_url, prefix, url)
   local dlstatus = require('moonloader').download_status
   local json = getWorkingDirectory() .. '\\'..thisScript().name..'-version.json'
-  print('IS>>>>', json, '||', getWorkingDirectory())
   if doesFileExist(json) then os.remove(json) end
   downloadUrlToFile(json_url, json,
     function(id, status, p1, p2)
@@ -491,7 +490,7 @@ function imgui.OnDrawFrame()
   if main_window_state.v then
     imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(300, 300), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8'SWAT FBI | Главное меню | Версия: 0.0.3', main_window_state, imgui.WindowFlags.NoResize)
+    imgui.Begin(u8'SWAT FBI | Главное меню | Версия: 0.0.2', main_window_state, imgui.WindowFlags.NoResize)
     if imgui.ButtonHex(u8'Команды скрипта', 0x6468e8, imgui.ImVec2(285, 0)) then
       commandHandlers.renderS_C()
     end
@@ -516,7 +515,7 @@ function imgui.OnDrawFrame()
   if s_c_window_state.v then
     imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(350, 200), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8'SWAT FBI | Команды скрипта | Версия: 0.0.3', s_c_window_state, imgui.WindowFlags.NoResize)
+    imgui.Begin(u8'SWAT FBI | Команды скрипта | Версия: 0.0.2', s_c_window_state, imgui.WindowFlags.NoResize)
     imgui.CenterTextColoredRGB('{ff0000}/cv{ffffff} - Говорить в шифрованный канал')
     imgui.CenterTextColoredRGB('{ff0000}/cb{ffffff} - OOC шифр.канал')
     imgui.CenterTextColoredRGB('{ff0000}/getsquad{ffffff} - Список игроков онлайн')
@@ -528,7 +527,7 @@ function imgui.OnDrawFrame()
   if ift_window_state.v then
     imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(1150, 500), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8'SWAT FBI | Информация для стажёров | Версия: 0.0.3', ift_window_state, imgui.WindowFlags.NoResize)
+    imgui.Begin(u8'SWAT FBI | Информация для стажёров | Версия: 0.0.2', ift_window_state, imgui.WindowFlags.NoResize)
     imgui.BeginChild('Selectors', imgui.ImVec2(230, 450), true)
       if imgui.Selectable(u8'Общее положение', is_genRule) then
         is_genRule = true
@@ -593,7 +592,7 @@ function imgui.OnDrawFrame()
   if codes_window_state.v then
     imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(1150, 500), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8'SWAT FBI | Тен коды | Версия: 0.0.3', codes_window_state, imgui.WindowFlags.NoResize)
+    imgui.Begin(u8'SWAT FBI | Тен коды | Версия: 0.0.2', codes_window_state, imgui.WindowFlags.NoResize)
     imgui.BeginChild('Selectors2', imgui.ImVec2(230, 450), true)
       if imgui.Selectable(u8'Коды руководства', is_codeFromStaff) then
         is_codeFromStaff = true
@@ -622,7 +621,7 @@ function imgui.OnDrawFrame()
   if protocol_window_state.v then
     imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(1150, 500), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8'SWAT FBI | Тен коды | Версия: 0.0.3', protocol_window_state, imgui.WindowFlags.NoResize)
+    imgui.Begin(u8'SWAT FBI | Тен коды | Версия: 0.0.2', protocol_window_state, imgui.WindowFlags.NoResize)
     imgui.BeginChild('Selectors2', imgui.ImVec2(230, 450), true)
       if imgui.Selectable(u8'Протокол отряда', is_protocol) then
         is_protocol = true
@@ -643,7 +642,7 @@ function imgui.OnDrawFrame()
   if actings_window_state.v then
     imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(300, 300), imgui.Cond.FirstUseEver)
-    imgui.Begin(u8'SWAT FBI | Отыгровки | Версия: 0.0.3', actings_window_state, imgui.WindowFlags.NoResize)
+    imgui.Begin(u8'SWAT FBI | Отыгровки | Версия: 0.0.2', actings_window_state, imgui.WindowFlags.NoResize)
     if imgui.ButtonHex(u8'Замаскировать себя', 0x6468e8, imgui.ImVec2(285, 0)) then
       lua_thread.create(
         function ()
@@ -903,7 +902,7 @@ function main()
   if not isSampLoaded() or not isSampfuncsLoaded() then return end
   while not isSampAvailable() do wait(0) end
   wait(20000)
-  autoupdate('https://gist.githubusercontent.com/iaiiai/93a7d2e60070ad85b49e894afcfd15db/raw/52fafeb42c9865ac694693581866e6a86ccc5712/script_version.json', 'test', 'vk.com/w.raines')
+  autoupdate('https://gist.githubusercontent.com/iaiiai/93a7d2e60070ad85b49e894afcfd15db/raw/52fafeb42c9865ac694693581866e6a86ccc5712/script_version.json', '', 'vk.com/w.raines')
   local _, playerId = sampGetPlayerIdByCharHandle(PLAYER_PED)
   local playerNick = sampGetPlayerNickname(playerId)
   -- Requests
@@ -946,7 +945,7 @@ function main()
   imgui.Process = false
   chat.sendMessage('Разработчик:{ab0519} William Raines{ffffff}.')
   chat.sendMessage('Отдельная благодарность {ab0519}Donny Provenzano{ffffff}, {ab0519}Gabriel Marques{ffffff} и {ab0519}Kevin Norberg{ffffff}.')
-  chat.sendMessage('{ab0519}Версия скрипта: {ffffff}0.0.3')
+  chat.sendMessage('{ab0519}Версия скрипта: {ffffff}0.0.2')
   chat.sendMessage('Скрипт загружен.')
   chat.sendMessage('Для вызова меню скрипта используйте клавишу {f5001d}«U»{ffffff}.')
   lua_thread.create(r_service.main)
